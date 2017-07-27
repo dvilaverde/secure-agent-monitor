@@ -74,10 +74,9 @@ The two dispatch services that can optionally be added are `avBusinessConnection
 
 ### Example Configuration
 
-![Service Connector Dispatch Service Configuration](screenshots/ds-businessconn.png){width="350px"}
+<img src="https://github.com/dvilaverde/secure-agent-monitor/blob/master/screenshots/ds-businessconn.png" alt="Service Connector Dispatch Service Configuration" width="350">
 
-
-![Service Connector Host Runtime Configuration](screenshots/ds-hostruntime.png =350x){width="350px"}
+<img src="https://github.com/dvilaverde/secure-agent-monitor/blob/master/screenshots/ds-hostruntime.png" alt="Service Connector Host Runtime Configuration" width="350px">
 
 ## Step 6 - PostGreSQL Monitoring (Optional)
 
