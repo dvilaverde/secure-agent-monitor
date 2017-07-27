@@ -4,7 +4,7 @@
 timeout 10 bash -c "until </dev/tcp/localhost/3000; do sleep 1; done"
 
 curl -s -H "Content-Type: application/json" -X POST http://admin:admin@localhost:3000/api/datasources -d @- <<EOF
-{"name":"ICRT","type":"prometheus","url":"http://prometheus:9090","access":"proxy","jsonData":{},"secureJsonFields":{},"isDefault":true}
+{"name":"SA","type":"prometheus","url":"http://prometheus:9090","access":"proxy","jsonData":{},"secureJsonFields":{},"isDefault":true}
 EOF
 
 pkill grafana-server

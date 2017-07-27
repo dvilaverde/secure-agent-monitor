@@ -18,12 +18,6 @@
     },
     {
       "type": "panel",
-      "id": "grafana-piechart-panel",
-      "name": "Pie Chart",
-      "version": "1.1.1"
-    },
-    {
-      "type": "panel",
       "id": "graph",
       "name": "Graph",
       "version": ""
@@ -42,8 +36,8 @@
     }
   ],
   "id": null,
-  "title": "Dispatch Summary",
-  "description": "Summary of the SA Dispatch Manager",
+  "title": "SA Summary",
+  "description": "Production SA AWS Cluster",
   "tags": [
     "SA"
   ],
@@ -56,345 +50,19 @@
     {
       "collapse": false,
       "editable": true,
-      "height": "100px",
+      "height": "213px",
       "panels": [
         {
           "cacheTimeout": null,
           "colorBackground": false,
-          "colorValue": false,
+          "colorValue": true,
           "colors": [
-            "rgba(245, 54, 54, 0.9)",
+            "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+            "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "SA",
           "decimals": 3,
-          "editable": true,
-          "error": false,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "",
-          "id": 13,
-          "interval": null,
-          "isNew": true,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "targets": [
-            {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount[1d]))",
-              "intervalFactor": 5,
-              "metric": "SA_dispatchstatistics_dispatchstatistics_completedrequestcount",
-              "refId": "A",
-              "step": 100
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": null,
-          "title": "Processes Over 24 Hours",
-          "transparent": false,
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "SA",
-          "decimals": 3,
-          "editable": true,
-          "error": false,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "",
-          "hideTimeOverride": false,
-          "id": 12,
-          "interval": null,
-          "isNew": true,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "targets": [
-            {
-              "expr": "sum(SA_dispatchstatistics_dispatchstatistics_completedrequestcount)",
-              "interval": "",
-              "intervalFactor": 4,
-              "refId": "B",
-              "step": 80
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": null,
-          "title": "Total Processes Since Restart",
-          "transparent": false,
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "SA",
-          "decimals": 3,
-          "editable": true,
-          "error": false,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 14,
-          "interval": null,
-          "isNew": true,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "targets": [
-            {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{destination=\"avHostEnvironmentRuntimeAccess\"}[15d]))",
-              "interval": "",
-              "intervalFactor": 4,
-              "legendFormat": "",
-              "metric": "SA_dispatchstatistics_dispatchstatistics_completedrequestcount",
-              "refId": "A",
-              "step": 43200
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": "15d",
-          "title": "Datasource Queries (15d)",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "SA",
-          "editable": true,
-          "error": false,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 15,
-          "interval": null,
-          "isNew": true,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "targets": [
-            {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{destination=\"avBusinessConnectionRESTService\"}[15d]))",
-              "intervalFactor": 4,
-              "refId": "A",
-              "step": 43200
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": "15d",
-          "title": "Service Connector Calls (15d)",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "SA",
           "editable": true,
           "error": false,
           "format": "none",
@@ -405,7 +73,8 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 5,
+          "height": "",
+          "id": 22,
           "interval": null,
           "isNew": true,
           "links": [],
@@ -423,7 +92,7 @@
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
-          "postfix": " /sec",
+          "postfix": "",
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
@@ -443,14 +112,14 @@
           },
           "targets": [
             {
-              "expr": "sum(irate(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1m]))",
-              "intervalFactor": 2,
+              "expr": "sum(irate(tomcat_servlet_errorcount_total{instance=~\"ps1w2aa[123]z.*\", servlet=\"localhost/activevos-central\"}[5m])) ",
+              "intervalFactor": 1,
               "refId": "A",
-              "step": 40
+              "step": 20
             }
           ],
-          "thresholds": "",
-          "title": "Completed Rate",
+          "thresholds": ".2,.5",
+          "title": "Central HTTP Error Rate / s",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -460,7 +129,244 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": true,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "datasource": "SA",
+          "decimals": 1,
+          "editable": true,
+          "error": false,
+          "format": "percentunit",
+          "gauge": {
+            "maxValue": 1,
+            "minValue": 0,
+            "show": true,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 20,
+          "interval": null,
+          "isNew": true,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 3,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "targets": [
+            {
+              "expr": "sum(SA_systemmetrics_workmanagermetrics_activethreadcount{instance=~\"$host:8140\"})/sum(SA_engineresource_threadpoolmin{instance=~\"$host:8140\"})",
+              "hide": false,
+              "intervalFactor": 1,
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "thresholds": ".50,.75",
+          "title": "Threads Used",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": true,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "datasource": "SA",
+          "decimals": 1,
+          "editable": true,
+          "error": false,
+          "format": "percentunit",
+          "gauge": {
+            "maxValue": 1,
+            "minValue": 0,
+            "show": true,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 21,
+          "interval": null,
+          "isNew": true,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 3,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "targets": [
+            {
+              "expr": "sum(SA_systemmetrics_inmemoryprocessmetrics_processcount{instance=~\"$host:8140\"})/sum(SA_engineresource_processcount{instance=~\"$host:8140\"})",
+              "hide": false,
+              "intervalFactor": 1,
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "thresholds": ".60,.80",
+          "title": "Process In Memory Usage",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": true,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "SA",
+          "editable": true,
+          "error": false,
+          "format": "ms",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 25,
+          "interval": null,
+          "isNew": true,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "s",
+          "postfixFontSize": "80%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "expr": "max(java_runtime_uptime)",
+              "interval": "5m",
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "refId": "A",
+              "step": 300
+            }
+          ],
+          "thresholds": "300,3600",
+          "title": "Process Server Uptime",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
         },
         {
           "cacheTimeout": null,
@@ -472,25 +378,26 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "datasource": "SA",
-          "decimals": 2,
+          "decimals": 1,
           "editable": true,
           "error": false,
-          "format": "none",
+          "format": "short",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
             "show": false,
             "thresholdLabels": false,
-            "thresholdMarkers": true
+            "thresholdMarkers": false
           },
-          "id": 8,
+          "height": "100px",
+          "id": 18,
           "interval": null,
           "isNew": true,
           "links": [
             {
-              "dashUri": "db/message-dispatch",
-              "dashboard": "Message Dispatch",
-              "title": "Message Dispatch",
+              "dashUri": "db/http-request",
+              "dashboard": "HTTP Request",
+              "title": "HTTP Request",
               "type": "dashboard"
             }
           ],
@@ -508,7 +415,96 @@
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
-          "postfix": " /sec",
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "expr": "sum(irate(tomcat_servlet_requestcount_total{instance=~\"$host:8140\"}[5m]))",
+              "intervalFactor": 1,
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "thresholds": "",
+          "title": "HTTP Requests Per Second",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "SA",
+          "decimals": 3,
+          "editable": true,
+          "error": false,
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "height": "100px",
+          "id": 19,
+          "interval": null,
+          "isNew": true,
+          "links": [
+            {
+              "dashUri": "db/message-dispatch",
+              "dashboard": "Message Dispatch",
+              "includeVars": true,
+              "keepTime": true,
+              "title": "Message Dispatch",
+              "type": "dashboard"
+            }
+          ],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "minSpan": 2,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
@@ -528,15 +524,15 @@
           },
           "targets": [
             {
-              "expr": "sum(irate(SA_dispatchstatistics_dispatchstatistics_faultedrequestcount{instance=~\"$host:8140\"}[5m]))",
+              "expr": "sum(rate(SA_serverstatistics_dispatchmsgrejected_overallcount[5m])) without (instance,env) + sum(rate(SA_serverstatistics_dispatchserviceoverflow_overallcount[5m])) without (instance,env)",
               "intervalFactor": 2,
-              "metric": "",
+              "legendFormat": "",
               "refId": "A",
               "step": 40
             }
           ],
           "thresholds": "",
-          "title": "Faulted Rate",
+          "title": "Rejected Message / sec.",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -546,10 +542,10 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "current"
         }
       ],
-      "title": "New row"
+      "title": "Stats Row"
     },
     {
       "collapse": false,
@@ -558,44 +554,8 @@
       "panels": [
         {
           "aliasColors": {},
-          "cacheTimeout": null,
-          "datasource": "SA",
-          "editable": true,
-          "error": false,
-          "fontSize": "80%",
-          "format": "short",
-          "id": 4,
-          "interval": null,
-          "isNew": true,
-          "legend": {
-            "show": true,
-            "values": true
-          },
-          "legendType": "Right side",
-          "links": [],
-          "maxDataPoints": 3,
-          "nullPointMode": "connected",
-          "pieType": "donut",
-          "span": 3,
-          "strokeWidth": 1,
-          "targets": [
-            {
-              "expr": "topk(5,sum(SA_dispatchstatistics_dispatchstatistics_executingrequestcount{instance=~\".*:8140\"}) without (instance)>0)",
-              "intervalFactor": 1,
-              "legendFormat": "{{destination}}",
-              "refId": "A",
-              "step": 600
-            }
-          ],
-          "title": "Current Active Destinations",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {},
           "bars": false,
           "datasource": "SA",
-          "decimals": 1,
           "editable": true,
           "error": false,
           "fill": 0,
@@ -608,76 +568,86 @@
           "id": 1,
           "isNew": true,
           "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "hideEmpty": true,
-            "max": true,
+            "avg": false,
+            "current": false,
+            "max": false,
             "min": false,
-            "show": false,
+            "show": true,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 2,
-          "links": [],
-          "nullPointMode": "null",
+          "links": [
+            {
+              "dashUri": "db/work-manager",
+              "dashboard": "Work Manager",
+              "includeVars": true,
+              "title": "Work Manager",
+              "type": "dashboard"
+            }
+          ],
+          "nullPointMode": "null as zero",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
+          "repeat": null,
+          "scopedVars": {},
           "seriesOverrides": [
             {
-              "alias": "Executing Requests",
-              "color": "#AEA2E0"
-            },
-            {
-              "alias": "CPU Load %",
+              "alias": "Total Processes",
               "yaxis": 2
             },
             {
-              "alias": "CPU Load %",
-              "linewidth": 1
+              "alias": "Total Processes",
+              "color": "#0A50A1"
             },
             {
-              "alias": "CPU Load %",
-              "color": "#CFFAFF"
+              "alias": "Total Processes",
+              "zindex": -2
+            },
+            {
+              "alias": "Database Connections",
+              "color": "#CCA300"
             }
           ],
-          "span": 9,
+          "span": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(SA_dispatchstatistics_dispatchstatistics_executingrequestcount{instance=~\"$host:8140\"})",
-              "intervalFactor": 2,
-              "legendFormat": "Executing Requests",
+              "expr": "sum(SA_systemmetrics_workmanagermetrics_activethreadcount{instance=~\"$host:8140\"}) without (instance,env)",
+              "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "Total Threads",
+              "metric": "SA_systemmetrics_workmanagermetrics_activethreadcount",
               "refId": "A",
-              "step": 2
+              "step": 1
             },
             {
-              "expr": "sum(SA_systemmetrics_workmanagermetrics_activethreadcount{instance=~\"$host:8140\"}) without (instance,env)",
+              "expr": "sum(SA_systemmetrics_inmemoryprocessmetrics_processcount{instance=~\"$host:8140\"}) without (instance,env)",
               "intervalFactor": 2,
-              "legendFormat": "Total Threads",
+              "legendFormat": "Total Processes",
               "refId": "B",
               "step": 2
             },
             {
-              "expr": "avg(java_operatingsystem_systemcpuload{instance=~\"$host:8140\"})",
+              "expr": "sum(tomcat_datasource_numactive_total{context=\"/active-bpel\",instance=~\"$host:8140\"}) without(instance,env)",
               "intervalFactor": 2,
-              "legendFormat": "CPU Load %",
+              "legendFormat": "Database Connections",
               "refId": "C",
               "step": 2
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Executing Request Count",
+          "title": "Work Manager Threads",
           "tooltip": {
             "msResolution": false,
             "shared": true,
             "sort": 0,
-            "value_type": "cumulative"
+            "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
@@ -686,230 +656,103 @@
           "yaxes": [
             {
               "format": "short",
-              "label": null,
+              "label": "",
               "logBase": 1,
               "max": null,
               "min": 0,
               "show": true
             },
             {
-              "format": "percentunit",
-              "label": "CPU %",
+              "format": "short",
+              "label": "",
               "logBase": 1,
-              "max": 1,
+              "max": null,
               "min": 0,
               "show": true
             }
           ]
-        }
-      ],
-      "title": "Row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
+        },
         {
-          "aliasColors": {},
           "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
           "datasource": "SA",
+          "decimals": 3,
           "editable": true,
           "error": false,
-          "fontSize": "70%",
-          "format": "short",
-          "id": 3,
+          "format": "ms",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 23,
           "interval": null,
           "isNew": true,
-          "legend": {
-            "show": true,
-            "values": true
-          },
-          "legendType": "Right side",
           "links": [],
-          "maxDataPoints": 3,
-          "minSpan": 4,
-          "nullPointMode": "connected",
-          "pieType": "donut",
-          "span": 3,
-          "strokeWidth": 1,
-          "targets": [
+          "mappingType": 1,
+          "mappingTypes": [
             {
-              "expr": "topk(10,sum(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\", destination=~\"0.*\"}) without (instance))",
-              "intervalFactor": 1,
-              "legendFormat": "{{destination}}",
-              "metric": "SA_dispatchstatistics_dispatchstatistics_completedrequestcount",
-              "refId": "A",
-              "step": 600
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
             }
           ],
-          "title": "Top 10 Most Active Tenants Since Restart",
-          "transparent": false,
-          "type": "grafana-piechart-panel",
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "targets": [
+            {
+              "expr": "avg(SA_dispatchstatistics_dispatchstatistics_avgexecutiontime{instance=~\"ps1w2aa[123]z.*:8140\", destination=\"ae-screenflow2\"})",
+              "intervalFactor": 2,
+              "refId": "A",
+              "step": 40
+            }
+          ],
+          "thresholds": "",
+          "title": "Guide Respone Time Avg.",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
           "valueName": "current"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "SA",
-          "decimals": 0,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 9,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "hideZero": true,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": false,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 5,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(SA_dispatchstatistics_dispatchstatistics_queuedrequestcount{instance=~\"$host:8140\"}) without(instance)",
-              "intervalFactor": 2,
-              "legendFormat": "{{destination}}",
-              "refId": "A",
-              "step": 4
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Destination Queue Depth",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "SA",
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 10,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": true,
-            "show": false,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(irate(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[5m]))",
-              "intervalFactor": 2,
-              "legendFormat": "Request Completed Rate",
-              "refId": "A",
-              "step": 4
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Requests per Second Trend",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
         }
       ],
-      "title": "New row"
+      "showTitle": false,
+      "title": "Work Manager"
     },
     {
       "collapse": false,
@@ -918,33 +761,31 @@
       "panels": [
         {
           "aliasColors": {},
-          "bars": true,
+          "bars": false,
           "datasource": "SA",
+          "decimals": null,
           "editable": true,
           "error": false,
-          "fill": 1,
+          "fill": 0,
           "grid": {
             "threshold1": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 11,
+          "id": 8,
           "isNew": true,
           "legend": {
             "alignAsTable": false,
             "avg": false,
             "current": false,
-            "hideEmpty": true,
-            "hideZero": true,
             "max": false,
             "min": false,
-            "rightSide": false,
             "show": false,
             "total": false,
             "values": false
           },
-          "lines": false,
+          "lines": true,
           "linewidth": 2,
           "links": [],
           "nullPointMode": "null as zero",
@@ -953,27 +794,27 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
-          "stack": true,
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1h])) without(destination)",
-              "interval": "1h",
-              "intervalFactor": 1,
+              "expr": "stddev_over_time(SA_serverstatistics_timetosaveprocess_overallavg{env=\"production\",instance=~\"$host:8140\"}[5m])",
+              "intervalFactor": 2,
               "legendFormat": "{{instance}}",
+              "metric": "SA_serverstatistics_timetosaveprocess_overallavg",
               "refId": "A",
-              "step": 3600
+              "step": 4
             }
           ],
-          "timeFrom": "1d",
+          "timeFrom": null,
           "timeShift": null,
-          "title": "Hourly Request Totals",
+          "title": "std(Time To Save Process)",
           "tooltip": {
             "msResolution": false,
             "shared": true,
             "sort": 0,
-            "value_type": "individual"
+            "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
@@ -982,58 +823,48 @@
           "yaxes": [
             {
               "format": "short",
-              "label": "Requests",
-              "logBase": 1,
+              "label": null,
+              "logBase": 2,
               "max": null,
-              "min": 0,
+              "min": null,
               "show": true
             },
             {
-              "format": "none",
-              "label": "",
+              "format": "short",
+              "label": null,
               "logBase": 1,
               "max": null,
               "min": null,
               "show": false
             }
           ]
-        }
-      ],
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
+        },
         {
           "aliasColors": {},
-          "bars": true,
+          "bars": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
-          "fill": 1,
+          "fill": 0,
           "grid": {
             "threshold1": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "hideTimeOverride": false,
-          "id": 16,
+          "id": 12,
           "isNew": true,
           "legend": {
-            "alignAsTable": true,
+            "alignAsTable": false,
             "avg": false,
-            "current": true,
+            "current": false,
             "max": false,
             "min": false,
-            "rightSide": true,
             "show": false,
             "total": false,
-            "values": true
+            "values": false
           },
-          "lines": false,
+          "lines": true,
           "linewidth": 2,
           "links": [],
           "nullPointMode": "null as zero",
@@ -1042,27 +873,27 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
-          "stack": true,
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1d])) without(destination)",
-              "interval": "1d",
-              "intervalFactor": 1,
+              "expr": "stddev_over_time(SA_serverstatistics_timetoobtainprocess_overallavg{env=\"production\", instance=~\"$host:8140\"}[5m])",
+              "intervalFactor": 2,
               "legendFormat": "{{instance}}",
+              "metric": "SA_serverstatistics_timetoobtainprocess_overallavg",
               "refId": "A",
-              "step": 86400
+              "step": 4
             }
           ],
-          "timeFrom": "7d",
+          "timeFrom": null,
           "timeShift": null,
-          "title": "Daily Request Totals",
+          "title": "std(Time to Acquire Process)",
           "tooltip": {
             "msResolution": false,
             "shared": true,
             "sort": 0,
-            "value_type": "individual"
+            "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
@@ -1072,9 +903,9 @@
             {
               "format": "short",
               "label": null,
-              "logBase": 1,
+              "logBase": 2,
               "max": null,
-              "min": 0,
+              "min": null,
               "show": true
             },
             {
@@ -1083,7 +914,7 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": false
+              "show": true
             }
           ]
         }
@@ -1135,16 +966,17 @@
         "query": "label_values(instance)",
         "refresh": 1,
         "regex": "/(ps.*):/",
-        "type": "query"
+        "type": "query",
+        "useTags": false
       }
     ]
   },
   "annotations": {
     "list": []
   },
-  "refresh": "1m",
+  "refresh": "10s",
   "schemaVersion": 12,
-  "version": 94,
+  "version": 351,
   "links": [
     {
       "asDropdown": true,

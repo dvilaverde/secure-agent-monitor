@@ -1,0 +1,97 @@
+---   
+lowercaseOutputLabelNames: true
+lowercaseOutputName: true
+blacklistObjectNames: ["Catalina:type=RequestProcessor,*","Catalina:type=Engine",
+                       "Catalina:j2eeType=WebModule,*","Catalina:type=NamingResources,*",
+                       "Catalina:type=Service","net.sf.ehcache:type=CacheStatistics,CacheManager=activevos,name=identity-cache-*",
+                       "Catalina:type=Server","Catalina:type=Host,host=localhost"]
+debug: false
+rules:
+- pattern: 'Catalina<type=GlobalRequestProcessor, name=\"(\w+-\w+)-(\d+)\"><>(\w+):'
+  name: tomcat_$3_total
+  labels:
+    port: "$2"
+    protocol: "$1"
+  help: Tomcat global $3
+  type: COUNTER
+- pattern: 'Catalina<j2eeType=Servlet, name=([-a-zA-Z0-9+/$%~_-|!.]*), WebModule=//([-a-zA-Z0-9+&@#/%?=~_|!:.,;]*[-a-zA-Z0-9+&@#/%=~_|]), J2EEApplication=none, J2EEServer=none><>(requestCount|maxTime|processingTime|errorCount):'
+  name: tomcat_servlet_$3_total
+  labels:
+    module: "$1"
+    servlet: "$2"
+  help: Tomcat servlet $3 total
+  type: COUNTER
+- pattern: 'Catalina<type=ThreadPool, name="(\w+-\w+)-(\d+)"><>(currentThreadCount|currentThreadsBusy|keepAliveCount|pollerThreadCount|connectionCount):'
+  name: tomcat_threadpool_$3
+  labels:
+    port: "$2"
+    protocol: "$1"
+  help: Tomcat threadpool $3
+  type: GAUGE
+- pattern: 'Catalina<type=Manager, context=([-a-zA-Z0-9+/$%~_-|!.]*), host=([-a-zA-Z0-9+&@#/%?=~_|!:.,;]*[-a-zA-Z0-9+&@#/%=~_|])><>(processingTime|sessionCounter|rejectedSessions|expiredSessions):'
+  name: tomcat_session_$3_total
+  labels:
+    context: "$2"
+    host: "$1"
+  help: Tomcat session $3 total
+  type: COUNTER
+- pattern: 'Catalina<type=DataSource, context=([-a-zA-Z0-9+\/$%~_-|!.]*), host=([-a-zA-Z0-9+&@#\/%?=~_|!:.,;]*[-a-zA-Z0-9+&@#\/%=~_|]), class=javax\.sql\.DataSource, name=\"(\w+\/\w+)\"><>numActive:'
+  name: tomcat_datasource_numactive_total
+  labels:
+    context: "$1"
+    host: "$2"
+  help: Tomcat DB Connection pool $3 active total
+  type: COUNTER
+- pattern: 'java.lang<type=(\w+), name=((\w+\s?)*)?><(\w+)>(\w+):'
+  name: java_$1_$2_$4_$5
+  help: Java $1 $2 $4 $5
+  type: GAUGE
+- pattern: 'java.lang<type=(\w+)><>(\w+):'
+  name: java_$1_$2
+  help: Java $1 $2
+  type: GAUGE
+- pattern: 'java.lang<type=(\w+)><(\w+)>(\w+):'
+  name: java_$1_$2_$3
+  help: Java $1 $2 $3
+  type: GAUGE
+- pattern: 'net.sf.ehcache<type=CacheStatistics, CacheManager=(\w+), name=(\S+)><>(CacheHitPercentage|CacheMissPercentage):'
+  name: ehcache_$3
+  labels:
+    manager: $1
+    cachename: $2
+  help: EhCache metrics for $3 in cache
+  type: GAUGE
+- pattern: 'net.sf.ehcache<type=CacheStatistics, CacheManager=(\w+), name=(\S+)><>(ObjectCount|InMemoryHits|InMemoryMisses):'
+  name: ehcache_$3
+  labels:
+    manager: $1
+    cachename: $2
+  help: EhCache metrics for $3 in cache
+  type: COUNTER  
+- pattern: 'com.activee.rt<name=ServerStatistics, type=monitoring><(\w+)?>(overallCount):'
+  name: sa_serverstatistics_$1_$2
+  help: SA $2 in composite '$1' of bean ServerStatistics 
+  type: COUNTER
+- pattern: 'com.activee.rt<name=ServerStatistics, type=monitoring><(\w+)?>(overall[^Count].+):'
+  name: sa_serverstatistics_$1_$2
+  help: SA $2 in composite '$1' of bean ServerStatistics
+  type: GAUGE
+- pattern: 'com.activee.rt<name=SystemMetrics, type=monitoring><(\w+)?>(\w+):'
+  name: sa_systemmetrics_$1_$2
+  help: SA $2 in composite '$1' of bean SystemMetrics 
+  type: GAUGE
+- pattern: 'com.activee.rt<name=EngineResource, type=monitoring><>(\w+):'
+  name: sa_engineresource_$1
+  help: SA engine property '$1' of bean EngineResource 
+  type: GAUGE
+- pattern: 'com.activee.rt<name=CatalogStatistics, type=monitoring><(\w+)?>(\w+):'
+  name: sa_catalogstatistics_$1_$2
+  help: SA $2 in composite '$1' of bean CatalogStatistics 
+  type: GAUGE
+- pattern: 'com.activee.rt<name=DispatchStatistics, type=monitoring, key=([\w\-]*)><(\w+)?>(\w+):'
+  name: sa_dispatchstatistics_$2_$3
+  labels:
+    destination: $1
+  help: SA $3 in composite '$2' of bean DispatchStatistics
+  type: GAUGE
+  
