@@ -72,10 +72,11 @@ The 'SA Summary' dashboard expects a couple of Dispatch Services configured to r
 
 The two dispatch services that can optionally be added are `avBusinessConnectionRESTService` and `avHostEnvironmentRuntimeAccess`.  If you are not sure what values to enter for 'Max Concurrent', 'Max In-Memory', 'Max Queued', and 'Timeout' then use the same values that are currently configured for the 'SystemDefault' dispatch service.
 
-Examples:
-![Service Connector Dispatch Service Configuration](screenshots/ds-businessconn.png)
+### Example Configuration
 
-![Service Connector Host Runtime Configuration](screenshots/ds-hostruntime.png)
+![Service Connector Dispatch Service Configuration](screenshots/ds-businessconn.png =350x)
+
+![Service Connector Host Runtime Configuration](screenshots/ds-hostruntime.png =350x)
 
 ## Step 6 - PostGreSQL Monitoring (Optional)
 
