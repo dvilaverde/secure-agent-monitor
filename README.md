@@ -42,16 +42,7 @@ static_configs:
 ```
 See Prometheus documentation regarding configuration and labels.
 
-## Step 3 - Start Services
-
-From the root directory of this Github project run the following:
-
-```docker
-docker-compose up --build
-```
-This will build the grafana image with and will include the pre-defined dashboards found in the `images/grafana/dashboards` directory.  It will also start Prometheus and Grafana and will install the Prometheus datasource when the container is started.
-
-## Step 4 - Configure Exporter on Secure Agent
+## Step 3 - Configure Exporter on Secure Agent
 
 Download [jxm_exporter](https://github.com/prometheus/jmx_exporter) from Github.  Direct link to the [Prometheus Agent](https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.9/jmx_prometheus_javaagent-0.9.jar).
 
@@ -63,6 +54,15 @@ Download [jxm_exporter](https://github.com/prometheus/jmx_exporter) from Github.
 * Add `-javaagent:./ext/jmx_prometheus_javaagent-0.9.jar=8140:../ext/sa-config.yml` to the secure agent Process Server config on Informatica Cloud.
 ![ICS Agent Runtime Configuration](screenshots/runtime-config.png)
 * Restart the Informatica Secure Agent.
+
+## Step 4 - Start Services
+
+From the root directory of this Github project run the following:
+
+```docker
+docker-compose up --build
+```
+This will build the grafana image with and will include the pre-defined dashboards found in the `images/grafana/dashboards` directory.  It will also start Prometheus and Grafana and will install the Prometheus datasource when the container is started.
 
 ## Step 5 - Dispatch Service Configuration (Optional)
 
