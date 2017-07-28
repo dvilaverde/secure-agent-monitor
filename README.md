@@ -6,9 +6,30 @@ The goal is to provide real time monitoring of a Informatica Secure Agent runnin
 
 # Setup Instructions
 
-These are written for installing with [Docker](https://www.docker.com/), [Docker for Mac](https://www.docker.com/docker-mac) or [Docker for Windows 10](https://www.docker.com/docker-windows). See Docker documention for insallation instructions.
+These are written for installing with [Docker](https://www.docker.com/), [Docker for Mac](https://www.docker.com/docker-mac) or [Docker for Windows 10](https://www.docker.com/docker-windows) version 17.06 or higher. The docker-compose file is written using version 2 so should be compatible with Docker version 1.10.0+, but certain commands in these instructions like 'docker volume' require a newer version of Docker.
 
-If you're using Docker with Virtual Box then there may be additional steps required, but I haven't tested with Virtual Box.
+Check your docker version to verify your version:
+```
+>$ docker version
+Client:
+ Version:      17.06.0-ce
+ API version:  1.30
+ Go version:   go1.8.3
+ Git commit:   02c1d87
+ Built:        Fri Jun 23 21:31:53 2017
+ OS/Arch:      darwin/amd64
+
+Server:
+ Version:      17.06.0-ce
+ API version:  1.30 (minimum version 1.12)
+ Go version:   go1.8.3
+ Git commit:   02c1d87
+ Built:        Fri Jun 23 21:51:55 2017
+ OS/Arch:      linux/amd64
+ Experimental: true
+```
+
+See Docker documention for insallation instructions. Also, if you're using Docker with Virtual Box then there may be additional steps required, but I haven't tested with Virtual Box.
 
 ## Step 1 - Creating a Data Volume
 Define the volume to store the metrics data collected by [Prometheus](https://prometheus.io). This will allow for future upgrades of the docker containers without losing any historical data.
@@ -44,7 +65,7 @@ static_configs:
           region: 'north-america'
           env: 'production'
 ```
-See Prometheus documentation regarding configuration and labels.
+See Prometheus documentation regarding [configuration](https://prometheus.io/docs/operating/configuration/#<static_config>) and [labels](https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels).
 
 ## Step 3 - Configure Exporter on Secure Agent
 
