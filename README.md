@@ -4,6 +4,8 @@
 
 These are written for installing with [Docker](https://www.docker.com/), [Docker for Mac](https://www.docker.com/docker-mac) or [Docker for Windows 10](https://www.docker.com/docker-windows). See Docker documention for insallation instructions.
 
+![Dashboard](screenshots/grafana-view.png)
+
 If you're using Docker with Virtual Box then there may be additional steps required, but I haven't tested with Virtual Box.
 
 ## Step 1 - Creating a Data Volume
@@ -71,6 +73,10 @@ The 'SA Summary' dashboard expects a couple of Dispatch Services configured to r
 ![Service Connector Dispatch Service Configuration](screenshots/ds1.png)
 
 The two dispatch services that can optionally be added are `avBusinessConnectionRESTService` and `avHostEnvironmentRuntimeAccess`.  If you are not sure what values to enter for 'Max Concurrent', 'Max In-Memory', 'Max Queued', and 'Timeout' then use the same values that are currently configured for the 'SystemDefault' dispatch service.
+
+## Step 6 - Login
+
+Visit http://localhost:3000 to get to Grafana to view the dashboards.  The default username and password is admin/admin.
 
 ### Example Configuration
 
