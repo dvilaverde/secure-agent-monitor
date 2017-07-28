@@ -78,6 +78,8 @@ The two dispatch services that can optionally be added are `avBusinessConnection
 
 Visit http://localhost:3000 to get to Grafana to view the dashboards.  The default username and password is admin/admin.
 
+You can view all the metrics being collected in the Prometheus application at http://localhost:9090.
+
 ### Example Configuration
 
 <img src="https://github.com/dvilaverde/secure-agent-monitor/blob/master/screenshots/ds-businessconn.png" alt="Service Connector Dispatch Service Configuration" width="350">
