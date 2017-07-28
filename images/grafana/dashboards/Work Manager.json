@@ -11,62 +11,67 @@
   ],
   "__requires": [
     {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.4.1"
+    },
+    {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
       "version": ""
     },
     {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "3.1.1"
-    },
-    {
       "type": "datasource",
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
     }
   ],
-  "id": null,
-  "title": "Work Manager",
-  "tags": [
-    "SA"
-  ],
-  "style": "dark",
-  "timezone": "utc",
+  "annotations": {
+    "list": []
+  },
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
   "hideControls": false,
-  "sharedCrosshair": true,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "title": "",
+      "type": "dashboards"
+    }
+  ],
+  "refresh": "10s",
   "rows": [
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "decimals": 0,
           "editable": true,
           "error": false,
           "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 1,
-          "isNew": true,
           "legend": {
             "avg": false,
             "current": false,
@@ -87,7 +92,6 @@
           "renderer": "flot",
           "repeat": null,
           "repeatIteration": 1501179752697,
-          "scopedVars": {},
           "seriesOverrides": [
             {
               "alias": "Active",
@@ -107,12 +111,14 @@
               "zindex": -3
             }
           ],
+          "spaceLength": 10,
           "span": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "SA_systemmetrics_workmanagermetrics_activethreadcount{instance=~\"$host:8140\"}",
+              "expr": "sa_systemmetrics_workmanagermetrics_activethreadcount{instance=~\"$host:8140\"}",
+              "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "Active",
@@ -120,7 +126,8 @@
               "step": 2
             },
             {
-              "expr": "SA_systemmetrics_workmanagermetrics_queuedrequestcount{instance=~\"$host:8140\"}",
+              "expr": "sa_systemmetrics_workmanagermetrics_queuedrequestcount{instance=~\"$host:8140\"}",
+              "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "Queued Work",
@@ -129,13 +136,15 @@
               "step": 2
             },
             {
-              "expr": "stddev_over_time(SA_serverstatistics_workmanagerstart_overallavg{instance=~\"$host:8140\"}[2m])",
+              "expr": "stddev_over_time(sa_serverstatistics_workmanagerstart_overallavg{instance=~\"$host:8140\"}[2m])",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Start Delay Deviation",
               "refId": "B",
               "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Work Manager ($host)",
@@ -147,7 +156,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -190,7 +203,6 @@
           },
           "id": 2,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -218,7 +230,6 @@
             }
           ],
           "repeatIteration": 1501179752697,
-          "scopedVars": {},
           "span": 2,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -226,9 +237,11 @@
             "lineColor": "rgb(31, 120, 193)",
             "show": false
           },
+          "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(SA_serverstatistics_workmanagerstart_overallavg{instance=~\"$host:8140\"}) by (instance)",
+              "expr": "sum(sa_serverstatistics_workmanagerstart_overallavg{instance=~\"$host:8140\"}) by (instance)",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "",
               "metric": "SA_serverstatistics_workmanagerstart_overallavg",
@@ -251,16 +264,42 @@
         }
       ],
       "repeat": "host",
-      "scopedVars": {
-        "host": {
-          "text": "ps1w2aa1z.rt.informaticacloud.com",
-          "value": "ps1w2aa1z.rt.informaticacloud.com",
-          "selected": false
-        }
-      },
-      "title": "Work Manager"
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Work Manager",
+      "titleSize": "h6"
     }
   ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [
+    "SA"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": "SA",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Host Name",
+        "multi": true,
+        "name": "host",
+        "options": [],
+        "query": "label_values(instance)",
+        "refresh": 1,
+        "regex": "/(.*):/",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
   "time": {
     "from": "now-30m",
     "to": "now"
@@ -290,41 +329,7 @@
       "30d"
     ]
   },
-  "templating": {
-    "list": [
-      {
-        "allValue": ".*",
-        "current": {},
-        "datasource": "SA",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Host Name",
-        "multi": true,
-        "name": "host",
-        "options": [],
-        "query": "label_values(instance)",
-        "refresh": 1,
-        "regex": "/(ps.*):/",
-        "type": "query"
-      }
-    ]
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": "10s",
-  "schemaVersion": 12,
-  "version": 83,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": true,
-      "keepTime": true,
-      "tags": [],
-      "title": "",
-      "type": "dashboards"
-    }
-  ],
-  "gnetId": null
+  "timezone": "utc",
+  "title": "Work Manager",
+  "version": 0
 }

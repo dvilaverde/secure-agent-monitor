@@ -11,16 +11,16 @@
   ],
   "__requires": [
     {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.4.1"
     },
     {
       "type": "panel",
       "id": "grafana-piechart-panel",
       "name": "Pie Chart",
-      "version": "1.1.1"
+      "version": "1.1.5"
     },
     {
       "type": "panel",
@@ -29,33 +29,41 @@
       "version": ""
     },
     {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "3.1.1"
-    },
-    {
       "type": "datasource",
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
     }
   ],
-  "id": null,
-  "title": "Dispatch Summary",
+  "annotations": {
+    "list": []
+  },
   "description": "Summary of the SA Dispatch Manager",
-  "tags": [
-    "SA"
-  ],
-  "style": "dark",
-  "timezone": "utc",
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
   "hideControls": false,
-  "sharedCrosshair": true,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "type": "dashboards"
+    }
+  ],
+  "refresh": "1m",
   "rows": [
     {
       "collapse": false,
-      "editable": true,
       "height": "100px",
       "panels": [
         {
@@ -82,7 +90,6 @@
           "height": "",
           "id": 13,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -116,11 +123,13 @@
             "lineColor": "rgb(31, 120, 193)",
             "show": false
           },
+          "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount[1d]))",
+              "expr": "sum(increase(sa_dispatchstatistics_dispatchstatistics_completedrequestcount[1d]))",
+              "format": "time_series",
               "intervalFactor": 5,
-              "metric": "SA_dispatchstatistics_dispatchstatistics_completedrequestcount",
+              "metric": "",
               "refId": "A",
               "step": 100
             }
@@ -165,7 +174,6 @@
           "hideTimeOverride": false,
           "id": 12,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -199,9 +207,11 @@
             "lineColor": "rgb(31, 120, 193)",
             "show": false
           },
+          "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(SA_dispatchstatistics_dispatchstatistics_completedrequestcount)",
+              "expr": "sum(sa_dispatchstatistics_dispatchstatistics_completedrequestcount)",
+              "format": "time_series",
               "interval": "",
               "intervalFactor": 4,
               "refId": "B",
@@ -247,7 +257,6 @@
           "hideTimeOverride": true,
           "id": 14,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -281,9 +290,11 @@
             "lineColor": "rgb(31, 120, 193)",
             "show": false
           },
+          "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{destination=\"avHostEnvironmentRuntimeAccess\"}[15d]))",
+              "expr": "sum(increase(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{destination=\"avHostEnvironmentRuntimeAccess\"}[15d]))",
+              "format": "time_series",
               "interval": "",
               "intervalFactor": 4,
               "legendFormat": "",
@@ -329,7 +340,6 @@
           "hideTimeOverride": true,
           "id": 15,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -363,9 +373,11 @@
             "lineColor": "rgb(31, 120, 193)",
             "show": false
           },
+          "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{destination=\"avBusinessConnectionRESTService\"}[15d]))",
+              "expr": "sum(increase(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{destination=\"avBusinessConnectionRESTService\"}[15d]))",
+              "format": "time_series",
               "intervalFactor": 4,
               "refId": "A",
               "step": 43200
@@ -407,7 +419,6 @@
           },
           "id": 5,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -441,9 +452,11 @@
             "lineColor": "rgb(31, 120, 193)",
             "show": true
           },
+          "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(irate(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1m]))",
+              "expr": "sum(irate(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1m]))",
+              "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
               "step": 40
@@ -485,7 +498,6 @@
           },
           "id": 8,
           "interval": null,
-          "isNew": true,
           "links": [
             {
               "dashUri": "db/message-dispatch",
@@ -526,9 +538,11 @@
             "lineColor": "rgb(31, 120, 193)",
             "show": true
           },
+          "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(irate(SA_dispatchstatistics_dispatchstatistics_faultedrequestcount{instance=~\"$host:8140\"}[5m]))",
+              "expr": "sum(irate(sa_dispatchstatistics_dispatchstatistics_faultedrequestcount{instance=~\"$host:8140\"}[5m]))",
+              "format": "time_series",
               "intervalFactor": 2,
               "metric": "",
               "refId": "A",
@@ -549,16 +563,24 @@
           "valueName": "avg"
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "cacheTimeout": null,
+          "combine": {
+            "label": "Others",
+            "threshold": 0
+          },
           "datasource": "SA",
           "editable": true,
           "error": false,
@@ -566,7 +588,6 @@
           "format": "short",
           "id": 4,
           "interval": null,
-          "isNew": true,
           "legend": {
             "show": true,
             "values": true
@@ -580,7 +601,8 @@
           "strokeWidth": 1,
           "targets": [
             {
-              "expr": "topk(5,sum(SA_dispatchstatistics_dispatchstatistics_executingrequestcount{instance=~\".*:8140\"}) without (instance)>0)",
+              "expr": "topk(5,sum(sa_dispatchstatistics_dispatchstatistics_executingrequestcount{instance=~\".*:8140\"}) without (instance)>0)",
+              "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{destination}}",
               "refId": "A",
@@ -594,19 +616,15 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "decimals": 1,
           "editable": true,
           "error": false,
           "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 1,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -644,19 +662,22 @@
               "color": "#CFFAFF"
             }
           ],
+          "spaceLength": 10,
           "span": 9,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(SA_dispatchstatistics_dispatchstatistics_executingrequestcount{instance=~\"$host:8140\"})",
+              "expr": "sum(sa_dispatchstatistics_dispatchstatistics_executingrequestcount{instance=~\"$host:8140\"})",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Executing Requests",
               "refId": "A",
               "step": 2
             },
             {
-              "expr": "sum(SA_systemmetrics_workmanagermetrics_activethreadcount{instance=~\"$host:8140\"}) without (instance,env)",
+              "expr": "sum(sa_systemmetrics_workmanagermetrics_activethreadcount{instance=~\"$host:8140\"}) without (instance,env)",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Total Threads",
               "refId": "B",
@@ -664,12 +685,14 @@
             },
             {
               "expr": "avg(java_operatingsystem_systemcpuload{instance=~\"$host:8140\"})",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "CPU Load %",
               "refId": "C",
               "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Executing Request Count",
@@ -681,7 +704,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -703,16 +730,24 @@
           ]
         }
       ],
-      "title": "Row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "cacheTimeout": null,
+          "combine": {
+            "label": "Others",
+            "threshold": 0
+          },
           "datasource": "SA",
           "editable": true,
           "error": false,
@@ -720,7 +755,6 @@
           "format": "short",
           "id": 3,
           "interval": null,
-          "isNew": true,
           "legend": {
             "show": true,
             "values": true
@@ -735,7 +769,8 @@
           "strokeWidth": 1,
           "targets": [
             {
-              "expr": "topk(10,sum(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\", destination=~\"0.*\"}) without (instance))",
+              "expr": "topk(10,sum(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\", destination=~\"0.*\"}) without (instance))",
+              "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{destination}}",
               "metric": "SA_dispatchstatistics_dispatchstatistics_completedrequestcount",
@@ -751,19 +786,15 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "decimals": 0,
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 9,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -785,18 +816,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 5,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(SA_dispatchstatistics_dispatchstatistics_queuedrequestcount{instance=~\"$host:8140\"}) without(instance)",
+              "expr": "sum(sa_dispatchstatistics_dispatchstatistics_queuedrequestcount{instance=~\"$host:8140\"}) without(instance)",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{destination}}",
               "refId": "A",
               "step": 4
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Destination Queue Depth",
@@ -808,7 +842,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -832,18 +870,14 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 10,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -864,18 +898,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 4,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[5m]))",
+              "expr": "sum(irate(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[5m]))",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Request Completed Rate",
               "refId": "A",
               "step": 4
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Requests per Second Trend",
@@ -887,7 +924,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -895,7 +936,7 @@
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -909,28 +950,28 @@
           ]
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 11,
-          "isNew": true,
           "legend": {
             "alignAsTable": false,
             "avg": false,
@@ -953,12 +994,14 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 12,
           "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1h])) without(destination)",
+              "expr": "sum(increase(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1h])) without(destination)",
+              "format": "time_series",
               "interval": "1h",
               "intervalFactor": 1,
               "legendFormat": "{{instance}}",
@@ -966,6 +1009,7 @@
               "step": 3600
             }
           ],
+          "thresholds": [],
           "timeFrom": "1d",
           "timeShift": null,
           "title": "Hourly Request Totals",
@@ -977,7 +1021,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -999,29 +1047,29 @@
           ]
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "hideTimeOverride": false,
           "id": 16,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -1042,12 +1090,14 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 12,
           "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(SA_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1d])) without(destination)",
+              "expr": "sum(increase(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}[1d])) without(destination)",
+              "format": "time_series",
               "interval": "1d",
               "intervalFactor": 1,
               "legendFormat": "{{instance}}",
@@ -1055,6 +1105,7 @@
               "step": 86400
             }
           ],
+          "thresholds": [],
           "timeFrom": "7d",
           "timeShift": null,
           "title": "Daily Request Totals",
@@ -1066,7 +1117,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -1088,9 +1143,43 @@
           ]
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     }
   ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [
+    "SA"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": "SA",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Node Name",
+        "multi": false,
+        "name": "host",
+        "options": [],
+        "query": "label_values(instance)",
+        "refresh": 1,
+        "regex": "/(.*):/",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
   "time": {
     "from": "now-30m",
     "to": "now"
@@ -1120,40 +1209,7 @@
       "30d"
     ]
   },
-  "templating": {
-    "list": [
-      {
-        "allValue": ".*",
-        "current": {},
-        "datasource": "SA",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Node Name",
-        "multi": false,
-        "name": "host",
-        "options": [],
-        "query": "label_values(instance)",
-        "refresh": 1,
-        "regex": "/(ps.*):/",
-        "type": "query"
-      }
-    ]
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": "1m",
-  "schemaVersion": 12,
-  "version": 94,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": true,
-      "keepTime": true,
-      "tags": [],
-      "type": "dashboards"
-    }
-  ],
-  "gnetId": null
+  "timezone": "utc",
+  "title": "Dispatch Summary",
+  "version": 2
 }

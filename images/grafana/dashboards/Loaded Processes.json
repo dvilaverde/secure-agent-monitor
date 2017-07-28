@@ -11,16 +11,16 @@
   ],
   "__requires": [
     {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.4.1"
+    },
+    {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
       "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "3.1.1"
     },
     {
       "type": "datasource",
@@ -29,38 +29,41 @@
       "version": "1.0.0"
     }
   ],
-  "id": null,
-  "title": "Loaded Processes",
-  "tags": [
-    "SA"
-  ],
-  "style": "dark",
-  "timezone": "utc",
+  "annotations": {
+    "list": []
+  },
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
   "hideControls": false,
-  "sharedCrosshair": true,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "type": "dashboards"
+    }
+  ],
+  "refresh": "10s",
   "rows": [
     {
       "collapse": false,
-      "editable": true,
       "height": "450px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)",
-            "thresholdLine": false
-          },
+          "grid": {},
           "id": 1,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -83,12 +86,14 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "SA_systemmetrics_inmemoryprocessmetrics_processcount{instance=~\"$host:8140\"}",
+              "expr": "sa_systemmetrics_inmemoryprocessmetrics_processcount{instance=~\"$host:8140\"}",
+              "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{instance}}",
@@ -96,6 +101,7 @@
               "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Processes In Memory",
@@ -107,7 +113,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -129,28 +139,28 @@
           ]
         }
       ],
-      "title": "Row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 2,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -171,12 +181,14 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
               "expr": "increase(ehcache_inmemorymisses{instance=~\"$host:8140\", cachename=\"ae-plan-cache\"}[1m])",
+              "format": "time_series",
               "interval": "1m",
               "intervalFactor": 1,
               "legendFormat": "{{instance}}",
@@ -185,6 +197,7 @@
               "step": 60
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Plan Cache Misses",
@@ -196,7 +209,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -204,7 +221,7 @@
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -218,9 +235,43 @@
           ]
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     }
   ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [
+    "SA"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": "SA",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Host Name",
+        "multi": false,
+        "name": "host",
+        "options": [],
+        "query": "label_values(instance)",
+        "refresh": 1,
+        "regex": "/(.*):/",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
   "time": {
     "from": "now-30m",
     "to": "now"
@@ -250,41 +301,7 @@
       "30d"
     ]
   },
-  "templating": {
-    "list": [
-      {
-        "allValue": ".*",
-        "current": {},
-        "datasource": "SA",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Host Name",
-        "multi": false,
-        "name": "host",
-        "options": [],
-        "query": "label_values(instance)",
-        "refresh": 1,
-        "regex": "/(ps.*):/",
-        "type": "query",
-        "useTags": false
-      }
-    ]
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": "10s",
-  "schemaVersion": 12,
-  "version": 23,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": true,
-      "tags": [],
-      "type": "dashboards"
-    }
-  ],
-  "gnetId": null
+  "timezone": "utc",
+  "title": "Loaded Processes",
+  "version": 0
 }

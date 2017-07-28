@@ -11,16 +11,16 @@
   ],
   "__requires": [
     {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.4.1"
+    },
+    {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
       "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "3.1.1"
     },
     {
       "type": "datasource",
@@ -29,38 +29,42 @@
       "version": "1.0.0"
     }
   ],
-  "id": null,
-  "title": "Message Dispatch",
-  "tags": [
-    "SA"
-  ],
-  "style": "dark",
-  "timezone": "utc",
+  "annotations": {
+    "list": []
+  },
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
   "hideControls": false,
-  "sharedCrosshair": true,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "type": "dashboards"
+    }
+  ],
+  "refresh": "10s",
   "rows": [
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "decimals": null,
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 1,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -80,20 +84,22 @@
           "points": false,
           "renderer": "flot",
           "repeatIteration": 1501179752696,
-          "scopedVars": {},
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 6,
           "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(SA_serverstatistics_dispatchmsgrejected_overallcount{instance=~\"$host:8140\"}[5m])",
+              "expr": "rate(sa_serverstatistics_dispatchmsgrejected_overallcount{instance=~\"$host:8140\"}[5m])",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{instance}}",
               "refId": "B",
               "step": 4
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Messages Rejected/s ($host) [5m]",
@@ -105,7 +111,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -129,18 +139,14 @@
         {
           "aliasColors": {},
           "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 2,
-          "isNew": true,
           "legend": {
             "avg": false,
             "current": false,
@@ -153,25 +159,27 @@
           "lines": false,
           "linewidth": 2,
           "links": [],
-          "nullPointMode": "connected",
+          "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "repeatIteration": 1501179752696,
-          "scopedVars": {},
           "seriesOverrides": [
             {
               "alias": "Rejected",
               "color": "#BA43A9"
             }
           ],
+          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "increase(SA_serverstatistics_dispatchmsgrejected_overallcount{instance=~\"$host:8140\"}[1h])",
+              "expr": "increase(sa_serverstatistics_dispatchmsgrejected_overallcount{instance=~\"$host:8140\"}[1h])",
+              "format": "time_series",
+              "hide": false,
               "interval": "1h",
               "intervalFactor": 1,
               "legendFormat": "Rejected",
@@ -179,6 +187,7 @@
               "step": 3600
             }
           ],
+          "thresholds": [],
           "timeFrom": "24h",
           "timeShift": null,
           "title": "Messages Rejected Trend ($host)",
@@ -190,7 +199,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -213,16 +226,42 @@
         }
       ],
       "repeat": "host",
-      "scopedVars": {
-        "host": {
-          "text": "ps1w2aa1z.rt.informaticacloud.com",
-          "value": "ps1w2aa1z.rt.informaticacloud.com",
-          "selected": false
-        }
-      },
-      "title": "Row"
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Row",
+      "titleSize": "h6"
     }
   ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [
+    "SA"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "./",
+        "current": {},
+        "datasource": "SA",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Host Name",
+        "multi": false,
+        "name": "host",
+        "options": [],
+        "query": "label_values(instance)",
+        "refresh": 1,
+        "regex": "/(.*):/",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
   "time": {
     "from": "now-30m",
     "to": "now"
@@ -252,40 +291,7 @@
       "30d"
     ]
   },
-  "templating": {
-    "list": [
-      {
-        "allValue": "./",
-        "current": {},
-        "datasource": "SA",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Host Name",
-        "multi": false,
-        "name": "host",
-        "options": [],
-        "query": "label_values(instance)",
-        "refresh": 1,
-        "regex": "/(ps.*):/",
-        "type": "query"
-      }
-    ]
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": "10s",
-  "schemaVersion": 12,
-  "version": 51,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": true,
-      "keepTime": true,
-      "tags": [],
-      "type": "dashboards"
-    }
-  ],
-  "gnetId": null
+  "timezone": "utc",
+  "title": "Message Dispatch",
+  "version": 0
 }

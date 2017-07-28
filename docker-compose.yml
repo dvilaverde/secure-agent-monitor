@@ -25,7 +25,7 @@ services:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./config/prometheus/process-engine.rules:/etc/prometheus/process-engine.rules
     command:
-      - "-storage.local.retention=720h0m0s"
+      - "-storage.local.retention=${PROM_RETENTION}"
       - "-storage.local.path=/prometheus"
       - "-config.file=/etc/prometheus/prometheus.yml"
       - "-web.console.libraries=/etc/prometheus/console_libraries"

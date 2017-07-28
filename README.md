@@ -60,7 +60,7 @@ Download [jxm_exporter](https://github.com/prometheus/jmx_exporter) from Github.
 From the root directory of this Github project run the following:
 
 ```docker
-docker-compose up --build
+docker-compose up -d --build
 ```
 This will build the grafana image with and will include the pre-defined dashboards found in the `images/grafana/dashboards` directory.  It will also start Prometheus and Grafana and will install the Prometheus datasource when the container is started.
 

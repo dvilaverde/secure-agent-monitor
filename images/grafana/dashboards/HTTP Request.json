@@ -11,22 +11,22 @@
   ],
   "__requires": [
     {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.4.1"
     },
     {
       "type": "panel",
       "id": "grafana-piechart-panel",
       "name": "Pie Chart",
-      "version": "1.1.1"
+      "version": "1.1.5"
     },
     {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "3.1.1"
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
     },
     {
       "type": "datasource",
@@ -35,39 +35,43 @@
       "version": "1.0.0"
     }
   ],
-  "id": null,
-  "title": "HTTP Request",
-  "tags": [
-    "SA"
-  ],
-  "style": "dark",
-  "timezone": "utc",
+  "annotations": {
+    "list": []
+  },
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
   "hideControls": false,
-  "sharedCrosshair": true,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "type": "dashboards"
+    }
+  ],
+  "refresh": "10s",
   "rows": [
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "decimals": 1,
           "editable": true,
           "error": false,
           "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "hideTimeOverride": false,
           "id": 2,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -89,12 +93,14 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 8,
           "stack": true,
           "steppedLine": false,
           "targets": [
             {
               "expr": "sum(irate(tomcat_servlet_requestcount_total{module!=\"AeEngineStatusServlet\",instance=~\"$host:8140\"}[5m])) by (module) >0",
+              "format": "time_series",
               "interval": "",
               "intervalFactor": 10,
               "legendFormat": "{{module}}",
@@ -102,6 +108,7 @@
               "step": 20
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Requests / sec. By Type ($host)",
@@ -113,7 +120,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -137,6 +148,10 @@
         {
           "aliasColors": {},
           "cacheTimeout": null,
+          "combine": {
+            "label": "Others",
+            "threshold": 0
+          },
           "datasource": "SA",
           "editable": true,
           "error": false,
@@ -144,7 +159,6 @@
           "format": "short",
           "id": 4,
           "interval": null,
-          "isNew": true,
           "legend": {
             "show": true,
             "values": true
@@ -160,6 +174,7 @@
           "targets": [
             {
               "expr": "topk(10,sum(tomcat_servlet_requestcount_total{module !=\"AeEngineStatusServlet\", instance=~\"$host:8140\"}) without (instance, servlet) > 0)",
+              "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{module}}",
               "refId": "A",
@@ -171,127 +186,29 @@
           "valueName": "current"
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "decimals": 2,
           "editable": true,
           "error": false,
           "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 9,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "Error %",
-              "color": "#3F2B5B"
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "100*(sum(increase(tomcat_servlet_errorcount_total{instance=~\"ps1w2aa1z.*\",servlet=\"localhost/activevos-central\"}[5m])) / sum((increase(tomcat_servlet_requestcount_total{instance=~\"ps1w2aa1z.*\",servlet=\"localhost/activevos-central\"} [5m])  >0)))",
-              "intervalFactor": 5,
-              "legendFormat": "ps1w2aa1z Error %",
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "100*(sum(increase(tomcat_servlet_errorcount_total{instance=~\"ps1w2aa2z.*\",servlet=\"localhost/activevos-central\"}[5m])) / sum((increase(tomcat_servlet_requestcount_total{instance=~\"ps1w2aa2z.*\",servlet=\"localhost/activevos-central\"} [5m])  >0)))",
-              "intervalFactor": 2,
-              "legendFormat": "ps1w2aa2z Error %",
-              "refId": "B",
-              "step": 4
-            },
-            {
-              "expr": "100*(sum(increase(tomcat_servlet_errorcount_total{instance=~\"ps1w2aa3z.*\",servlet=\"localhost/activevos-central\"}[5m])) / sum((increase(tomcat_servlet_requestcount_total{instance=~\"ps1w2aa3z.*\",servlet=\"localhost/activevos-central\"} [5m])  >0)))",
-              "intervalFactor": 2,
-              "legendFormat": "ps1w2aa3z Error %",
-              "refId": "C",
-              "step": 4
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "AVOS Central HTTP Error %",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "percent",
-              "label": null,
-              "logBase": 2,
-              "max": 100,
-              "min": 0,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "SA",
-          "decimals": 2,
-          "editable": true,
-          "error": false,
-          "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 8,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -312,18 +229,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "spaceLength": 10,
+          "span": 8,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "increase(tomcat_errorcount_total{instance=~\"$host:8140\",port=\"4430\"}[5m]) / (increase(tomcat_requestcount_total{instance=~\"$host:8140\",port=\"4430\"} [5m])  >0)",
+              "expr": "increase(tomcat_errorcount_total{instance=~\"$host:8140\"}[5m]) / (increase(tomcat_requestcount_total{instance=~\"$host:8140\"} [5m])  >0)",
+              "format": "time_series",
               "intervalFactor": 10,
-              "legendFormat": "{{instance}}",
+              "legendFormat": "{{instance}}:{{port}}",
               "refId": "A",
               "step": 20
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "HTTP Error % ($host)",
@@ -335,7 +255,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -355,96 +279,14 @@
               "show": true
             }
           ]
-        }
-      ],
-      "title": "New row"
-    },
-    {
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "SA",
-          "editable": true,
-          "error": false,
-          "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 6,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 8,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(irate(tomcat_servlet_errorcount_total{instance=~\"ps1w2aa[123]z.*\", servlet=\"localhost/activevos-central\"}[5m])) by (instance)",
-              "intervalFactor": 1,
-              "legendFormat": "{{instance}} ",
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Interactive HTTP Errors per Second",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 2,
-              "max": null,
-              "min": 0,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
         },
         {
           "aliasColors": {},
           "cacheTimeout": null,
+          "combine": {
+            "label": "Others",
+            "threshold": 0
+          },
           "datasource": "SA",
           "editable": true,
           "error": false,
@@ -452,7 +294,6 @@
           "format": "short",
           "id": 7,
           "interval": null,
-          "isNew": true,
           "legend": {
             "show": true,
             "values": true
@@ -466,7 +307,8 @@
           "strokeWidth": 1,
           "targets": [
             {
-              "expr": "topk(6,sum(tomcat_servlet_errorcount_total{servlet!=\"localhost/activebpel-cert\"}) by (module,servlet))",
+              "expr": "topk(6,sum(tomcat_servlet_errorcount_total{servlet!=\"localhost/process-engine-cert\"}) by (module,servlet))",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{module}} ({{servlet}})",
               "refId": "A",
@@ -479,29 +321,29 @@
           "valueName": "current"
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "hideTimeOverride": false,
           "id": 5,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -522,12 +364,14 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 8,
           "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(tomcat_servlet_requestcount_total{module=~\"AeOData[24]ServiceServlet\",instance=~\"$host:8140\", servlet=\"localhost/active-bpel\"}[1d])) without(instance)",
+              "expr": "sum(increase(tomcat_servlet_requestcount_total{module=~\"AeOData[24]ServiceServlet\",instance=~\"$host:8140\", servlet=\"localhost/process-engine\"}[1d])) without(instance)",
+              "format": "time_series",
               "interval": "1d",
               "intervalFactor": 1,
               "legendFormat": "{{module}}",
@@ -535,6 +379,7 @@
               "step": 86400
             }
           ],
+          "thresholds": [],
           "timeFrom": "1w",
           "timeShift": null,
           "title": "OData Requests Daily",
@@ -546,7 +391,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": false
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": false,
+            "values": []
           },
           "yaxes": [
             {
@@ -570,6 +419,10 @@
         {
           "aliasColors": {},
           "cacheTimeout": null,
+          "combine": {
+            "label": "Others",
+            "threshold": 0
+          },
           "datasource": "SA",
           "editable": true,
           "error": false,
@@ -577,7 +430,6 @@
           "format": "ms",
           "id": 10,
           "interval": null,
-          "isNew": true,
           "legend": {
             "show": true,
             "values": true
@@ -592,6 +444,7 @@
           "targets": [
             {
               "expr": "topk(5,avg(sum(tomcat_servlet_processingtime_total{module != \"AeEngineStatusServlet\", instance=~\"$host:8140\"}) by (instance, module, servlet) / sum(tomcat_servlet_requestcount_total{instance=~\"$host:8140\"}) by (instance, module, servlet)) by (module, servlet) > 0)",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{module}} - {{servlet}}",
               "refId": "A",
@@ -603,28 +456,28 @@
           "valueName": "current"
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "SA",
           "editable": true,
           "error": false,
           "fill": 0,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 3,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -645,18 +498,21 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(tomcat_threadpool_currentthreadsbusy{instance=~\"$host:8140\",port!=\"8090\"} > 0) by (instance,port)",
+              "expr": "sum(tomcat_threadpool_currentthreadsbusy{instance=~\"$host:8140\"} > 0) by (instance,port)",
+              "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{port}}@{{instance}}",
               "refId": "A",
               "step": 2
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "HTTP ThreadPool Busy Threads ($host)",
@@ -668,7 +524,11 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -690,9 +550,43 @@
           ]
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     }
   ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [
+    "SA"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": "SA",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Host Name",
+        "multi": false,
+        "name": "host",
+        "options": [],
+        "query": "label_values(instance)",
+        "refresh": 1,
+        "regex": "/(.*):/",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
   "time": {
     "from": "now-30m",
     "to": "now"
@@ -722,40 +616,7 @@
       "30d"
     ]
   },
-  "templating": {
-    "list": [
-      {
-        "allValue": ".*",
-        "current": {},
-        "datasource": "SA",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Host Name",
-        "multi": false,
-        "name": "host",
-        "options": [],
-        "query": "label_values(instance)",
-        "refresh": 1,
-        "regex": "/(ps.*):/",
-        "type": "query"
-      }
-    ]
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": "10s",
-  "schemaVersion": 12,
-  "version": 155,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": true,
-      "keepTime": true,
-      "tags": [],
-      "type": "dashboards"
-    }
-  ],
-  "gnetId": null
+  "timezone": "utc",
+  "title": "HTTP Request",
+  "version": 5
 }

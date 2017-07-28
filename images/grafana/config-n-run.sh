@@ -13,6 +13,6 @@ timeout 10 bash -c "while </dev/tcp/localhost/3000; do sleep 1; done"
 # Install any plugins required now that the datasource has been created.
 # This is done only after the datasource is installed otherwise the create above
 # will try to run the curl while the grafana server is restarting.
-export GF_INSTALL_PLUGINS: grafana-piechart-panel
+export GF_INSTALL_PLUGINS=grafana-piechart-panel
 
 exec ./run.sh "${@}"
