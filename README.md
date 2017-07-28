@@ -1,6 +1,6 @@
 # Summary
 
-The goal is to provide real time monitoring of a Informatica Secure Agent running the a licensed Process Engine package.
+The goal is to provide real time monitoring of a Informatica® Secure Agent running the a licensed Process Engine package.
 
 ![Dashboard](screenshots/grafana-view.png)
 
@@ -76,7 +76,7 @@ Download [jxm_exporter](https://github.com/prometheus/jmx_exporter) from Github.
  C:\Program Files\Informatica Cloud Secure Agent\apps\process-engine\ext
  ```
 * Copy the Prometheus Agent configuration file from `config/agent/sa-config.yml` to the same directory as the JAR above.
-* Add `-javaagent:./ext/jmx_prometheus_javaagent-0.9.jar=8140:../ext/sa-config.yml` to the secure agent Process Server config on Informatica Cloud.
+* Add `-javaagent:./ext/jmx_prometheus_javaagent-0.9.jar=8140:../ext/sa-config.yml` to the secure agent Process Server config on Informatica Cloud®.
 ![ICS Agent Runtime Configuration](screenshots/runtime-config.png)
 * Restart the Informatica Secure Agent.
 
@@ -127,3 +127,6 @@ Not yet implemented.
 But can easily be extended by adding the [Prometheus AlertManager](https://github.com/prometheus/alertmanager) into this configuration.  See AlertManager documentation for configuring routing rules for alerts received by Prometheus.
 
 Any contributions to add alerting will be appreciated.
+
+# Disclaimer
+This project is not affiliated with Informatica, LLC. All Informatica product names are trademarks or registered trademarks of Informatica, LLC. All other company and product names are trademarks or registered trademarks of their respective companies.
