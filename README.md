@@ -74,19 +74,19 @@ The 'SA Summary' dashboard expects a couple of Dispatch Services configured to r
 
 The two dispatch services that can optionally be added are `avBusinessConnectionRESTService` and `avHostEnvironmentRuntimeAccess`.  If you are not sure what values to enter for 'Max Concurrent', 'Max In-Memory', 'Max Queued', and 'Timeout' then use the same values that are currently configured for the 'SystemDefault' dispatch service.
 
-## Step 6 - Login
-
-Visit http://localhost:3000 to get to Grafana to view the dashboards.  The default username and password is admin/admin.
-
-You can view all the metrics being collected in the Prometheus application at http://localhost:9090.
-
 ### Example Configuration
 
 <img src="https://github.com/dvilaverde/secure-agent-monitor/blob/master/screenshots/ds-businessconn.png" alt="Service Connector Dispatch Service Configuration" width="350">
 
 <img src="https://github.com/dvilaverde/secure-agent-monitor/blob/master/screenshots/ds-hostruntime.png" alt="Service Connector Host Runtime Configuration" width="350px">
 
-## Step 6 - PostGreSQL Monitoring (Optional)
+## Step 6 - Login
+
+Visit http://localhost:3000 to get to Grafana to view the dashboards.  The default username and password is admin/admin.
+
+You can view all the metrics being collected in the Prometheus application at http://localhost:9090.
+
+## Step 7 - PostGreSQL Monitoring (Optional)
 
 Not yet implemented.
 
