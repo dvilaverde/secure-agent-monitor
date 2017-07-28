@@ -1,10 +1,12 @@
+# Summary
 
+The goal is to provide real time monitoring of a Informatica Secure Agent running the a licensed Process Engine package.
+
+![Dashboard](screenshots/grafana-view.png)
 
 # Setup Instructions
 
 These are written for installing with [Docker](https://www.docker.com/), [Docker for Mac](https://www.docker.com/docker-mac) or [Docker for Windows 10](https://www.docker.com/docker-windows). See Docker documention for insallation instructions.
-
-![Dashboard](screenshots/grafana-view.png)
 
 If you're using Docker with Virtual Box then there may be additional steps required, but I haven't tested with Virtual Box.
 
