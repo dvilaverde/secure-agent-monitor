@@ -76,7 +76,7 @@ Download [jxm_exporter](https://github.com/prometheus/jmx_exporter) from Github.
  C:\Program Files\Informatica Cloud Secure Agent\apps\process-engine\ext
  ```
 * Copy the Prometheus Agent configuration file from `config/agent/sa-config.yml` to the same directory as the JAR above.
-* Add `-javaagent:./ext/jmx_prometheus_javaagent-0.9.jar=8140:../ext/sa-config.yml` to the secure agent Process Server config on Informatica Cloud®.
+* Add `-javaagent:../ext/jmx_prometheus_javaagent-0.9.jar=8140:../ext/sa-config.yml` to the secure agent Process Server config on Informatica Cloud®.
 ![ICS Agent Runtime Configuration](screenshots/runtime-config.png)
 * Restart the Informatica Secure Agent.
 
