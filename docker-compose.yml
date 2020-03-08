@@ -2,7 +2,7 @@ version: "2"
 services:
   grafana:
     build: ./images/grafana
-    image: "informatica/grafana:4.4.1"
+    image: "informatica/grafana:4.6.3"
     hostname: grafana
     restart: on-failure:3  
     networks:
@@ -12,7 +12,7 @@ services:
       - "3000:3000"
 
   prometheus:
-    image: "prom/prometheus:v1.7.1"
+    image: "prom/prometheus:v2.16.0"
     hostname: prometheus
     restart: on-failure:3
     networks:
@@ -23,13 +23,13 @@ services:
     volumes:
       - metrics_data:/prometheus
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./config/prometheus/process-engine.rules:/etc/prometheus/process-engine.rules
+      - ./config/prometheus/process-engine.rules.yml:/etc/prometheus/process-engine.rules.yml
     command:
-      - "-storage.local.retention=${PROM_RETENTION}"
-      - "-storage.local.path=/prometheus"
-      - "-config.file=/etc/prometheus/prometheus.yml"
-      - "-web.console.libraries=/etc/prometheus/console_libraries"
-      - "-web.console.templates=/etc/prometheus/consoles"
+      - "--storage.tsdb.retention.time=${PROM_RETENTION}"
+      - "--storage.tsdb.path=/prometheus"
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
 networks:
     default:
       ipam:

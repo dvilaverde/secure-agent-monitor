@@ -11,7 +11,7 @@ global:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-  - "process-engine.rules"
+  - "process-engine.rules.yml"
   # - "second.rules"
 
 # A scrape configuration containing exactly one endpoint to scrape:
@@ -26,7 +26,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['127.0.0.1:8140']
-        labels:
-          group: 'secure-agent'
-          env: 'production'
+    - targets: ['dvilaver-wrmj.localhost.run']
+      labels:
+        group: 'secure-agent'
+        env: 'production'

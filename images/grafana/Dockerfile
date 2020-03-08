@@ -1,4 +1,4 @@
-FROM grafana/grafana:4.4.1
+FROM grafana/grafana:4.6.3
 
 COPY config-n-run.sh config-n-run.sh
 

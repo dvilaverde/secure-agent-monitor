@@ -769,7 +769,7 @@
           "strokeWidth": 1,
           "targets": [
             {
-              "expr": "topk(10,sum(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\", destination=~\"0.*\"}) without (instance))",
+              "expr": "topk(10,sum(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~\"$host:8140\"}) without (instance))",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{destination}}",

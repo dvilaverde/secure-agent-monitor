@@ -31,7 +31,26 @@ Server:
 
 See Docker documention for insallation instructions. Also, if you're using Docker with Virtual Box then there may be additional steps required, but I haven't tested with Virtual Box.
 
-## Step 1 - Creating a Data Volume
+## Step 1 - Configure Exporter on Secure Agent
+
+Download [jxm_exporter](https://github.com/prometheus/jmx_exporter) from Github.  Direct link to the [Prometheus Agent](https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.12.0/jmx_prometheus_javaagent-0.12.0.jar).
+
+* Copy the JAR to the server running the Informatica Secure Agent. I suggest using a directory that won't be overwritten during agent upgrades, for example:
+```
+ C:\Program Files\Informatica Cloud Secure Agent\apps\process-engine\ext
+ ```
+* Copy the Prometheus Agent configuration file from `config/agent/sa-config.yml` to the same directory as the JAR above.
+
+   > This sa-config.yml is a template of some common metrics available from the process-server via JMX. Refer to the Prometheus documentations to add additional metrics. You can find additional metrics by connecting a tool like JMC or VisualVM to the secure-agent JVM.
+
+* On Informatica Cloud®, add `-javaagent:../ext/jmx_prometheus_javaagent-0.12.0.jar=8140:../ext/sa-config.yml` to the secure agent Process Server 'jvm' configuration property named 'additional-properties' as shown below.
+![ICS Agent Runtime Configuration](screenshots/runtime-config.png)
+
+  > **Note:** The above configuration references a jmx_prometheus_javaagent jar with version 0.12.0, which may need to change to match the jar you copied to the 'ext' folder.  Additionally, the metrics are configured to be exposed on port 8140, if you need to expose the metrics on a different port you'll need to alter the port number in this configuration string above.
+
+* Restart the Informatica Secure Agent.
+
+## Step 2 - Creating a Data Volume
 Define the volume to store the metrics data collected by [Prometheus](https://prometheus.io). This will allow for future upgrades of the docker containers without losing any historical data.
 ```docker
 docker volume create --name metrics_data
@@ -42,7 +61,7 @@ If you ever need to see the contents of the metrics_data volume you can use the 
 docker run --rm -i -v=metrics_data:/prometheus busybox find /prometheus
 ```
 
-## Step 2 - Configure Prometheus
+## Step 3 - Configure Prometheus
 
 Edit the file located at `config/prometheus/prometheus.yml` to add the IP address or DNS name to your secure agent.
 
@@ -67,19 +86,6 @@ static_configs:
 ```
 See Prometheus documentation regarding [configuration](https://prometheus.io/docs/operating/configuration/#<static_config>) and [labels](https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels).
 
-## Step 3 - Configure Exporter on Secure Agent
-
-Download [jxm_exporter](https://github.com/prometheus/jmx_exporter) from Github.  Direct link to the [Prometheus Agent](https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.9/jmx_prometheus_javaagent-0.9.jar).
-
-* Copy the JAR to the server running the Informatica Secure Agent. I suggest using a directory that won't be overwritten during agent upgrades, for example:
-```
- C:\Program Files\Informatica Cloud Secure Agent\apps\process-engine\ext
- ```
-* Copy the Prometheus Agent configuration file from `config/agent/sa-config.yml` to the same directory as the JAR above.
-* Add `-javaagent:../ext/jmx_prometheus_javaagent-0.9.jar=8140:../ext/sa-config.yml` to the secure agent Process Server config on Informatica Cloud®.
-![ICS Agent Runtime Configuration](screenshots/runtime-config.png)
-* Restart the Informatica Secure Agent.
-
 ## Step 4 - Start Services
 
 From the root directory of this Github project run the following:
@@ -92,6 +98,8 @@ This will build the grafana image with and will include the pre-defined dashboar
 ## Step 5 - Dispatch Service Configuration (Optional)
 
 The 'SA Summary' dashboard expects a couple of Dispatch Services configured to render a couple of the single-stat panels.
+
+  > In newer versions of the process-server application deployed to your secure agent, Informatica has already defined a handful of default Dispatch Services. If your agent already has some defined, skip this step.
 
 ![Service Connector Dispatch Service Configuration](screenshots/ds1.png)
 
@@ -109,7 +117,19 @@ Visit http://localhost:3000 to get to Grafana to view the dashboards.  The defau
 
 You can view all the metrics being collected in the Prometheus application at http://localhost:9090.
 
-## Step 7 - PostGreSQL Monitoring (Optional)
+## Step 7 - Dashboards
+
+Dashboards are written with queries that assume the metrics are collected from a target using port 8140. If you changed the port in Step #1, then you'll need to update the queries used in each dashboard panel.
+
+For example, on the Dispatch Summary Dashboard there is a panel named 'Completed Rate' with the following query:
+
+`sum(irate(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~"$host:8140"}[1m]))`
+
+but if you started the metrics collection port on port 9555 then you'd update the above query to:
+
+`sum(irate(sa_dispatchstatistics_dispatchstatistics_completedrequestcount{instance=~"$host:9555"}[1m]))`
+
+## Step 8 - PostGreSQL Monitoring (Optional)
 
 Not yet implemented.
 
@@ -125,6 +145,8 @@ Any contributions to add PostGreSQL monitoring are appreciated.
 Not yet implemented.
 
 But can easily be extended by adding the [Prometheus AlertManager](https://github.com/prometheus/alertmanager) into this configuration.  See AlertManager documentation for configuring routing rules for alerts received by Prometheus.
+
+By default this project has configured some rules as examples of the types of alerts you might be interested in. As you add additional metrics into sa-config.yml you'll likely want to add additional rules.
 
 Any contributions to add alerting will be appreciated.
 
