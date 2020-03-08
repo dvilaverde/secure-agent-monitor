@@ -1,0 +1,193 @@
+groups:
+- name: /etc/prometheus/process-engine.rules
+  rules:
+  - alert: HighConnectionPoolUsage
+    expr: (tomcat_datasource_numactive_total{context="/active-bpel"} / sa_engineresource_threadpoolmax)
+      * 100 > 80
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} has a connection count above 80% for longer
+        than 1 minute, (current value: {{ $value }}%)'
+      summary: High connection pool usage on {{ $labels.instance }}
+  - alert: HighProcessInMemoryCount
+    expr: (sa_systemmetrics_inmemoryprocessmetrics_processcount / sa_engineresource_processcount)
+      * 100 > 75
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} is nearing max allowable processes in memory
+        count, (current value: {{ $value }})'
+      summary: High processes in memory count on {{ $labels.instance }}
+  - alert: ProcessInMemoryCountExceeded
+    expr: sa_systemmetrics_inmemoryprocessmetrics_processcount > sa_engineresource_processcount
+    for: 10s
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} has exceeded the max allowed processes
+        in memory (current value: {{ $value }})'
+      summary: Processes in memory count exceeded on {{ $labels.instance }}
+  - alert: HighMessageRejectedRate
+    expr: rate(sa_serverstatistics_dispatchmsgrejected_overallcount[5m]) > 0.5
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} is rejecting requests at a rate of {{ $value
+        }} messages per second.'
+      summary: Rapidly rejecting messages on {{ $labels.instance }}
+  - alert: HighHttpThreadCount
+    expr: (tomcat_threadpool_currentthreadsbusy{port="4430"} / 600) * 100 > 80
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} has {{ $value }} active HTTP threads out
+        of a total 600.'
+      summary: HTTP thread usage on {{ $labels.instance }} is nearing limit
+  - alert: ClusterCommunicationsIssue
+    expr: increase(sa_serverstatistics_clustercommunicationissue_overallcount[1m])
+      > 1
+    for: 5s
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} has detected a cluster {{ $value }} communications
+        issue(s), please check cluster health.'
+      summary: Node {{ $labels.instance }} has detected a cluster communications issue.
+  - alert: DatabaseConnectionAcquisitionTime
+    expr: sa_serverstatistics_databaseconnectionacquisitiontime_overallavg > 500
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} database connection acquisition time is
+        higher that 500ms, (current value: {{ $value }}ms).'
+      summary: Node {{ $labels.instance }} database connection acquisition time too
+        high
+  - alert: DeadlockRetryAttempts
+    expr: increase(sa_serverstatistics_deadlockretry_overallcount[1m]) > 1
+    for: 1s
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} has had {{ $value }} deadlock retry attempts
+        over the last minute.'
+      summary: Node {{ $labels.instance }} deadlock retry detected.
+  - alert: EngineRemovedFromCluster
+    expr: increase(sa_serverstatistics_engineremoved_overallcount[5m]) > 1
+    for: 1s
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} has detected another engine has been removed
+        from the cluster.'
+      summary: Node {{ $labels.instance }} detected another engine has been removed
+        from the cluster.
+  - alert: FailedToLockProcess
+    expr: increase(sa_serverstatistics_failedtolockprocess_overallcount[5m]) > 1
+    for: 1s
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} failed to lock process {{ $value }} times
+        over the last 5 minutes.'
+      summary: Node {{ $labels.instance }} failed to lock process.
+  - alert: TimeToSaveProcess
+    expr: stddev_over_time(sa_serverstatistics_timetosaveprocess_overallavg{env="production"}[5m])
+      > 3
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} has had increasing time to save process
+        over the last 5 minutes.'
+      summary: Node {{ $labels.instance }} increasing time to save process.
+  - alert: TimeToSaveProcessCritical
+    expr: stddev_over_time(sa_serverstatistics_timetosaveprocess_overallavg{env="production"}[5m])
+      > 6
+    for: 5m
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} has had increasing time to save process
+        over the last 5 minutes.'
+      summary: Node {{ $labels.instance }} increasing time to save process.
+  - alert: TimeToObtainProcess
+    expr: stddev_over_time(sa_serverstatistics_timetoobtainprocess_overallavg{env="production"}[5m])
+      > 3
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} has had increasing time to obtain process
+        over the last 5 minutes.'
+      summary: Node {{ $labels.instance }} increasing time to obtain process.
+  - alert: TimeToObtainProcessCritical
+    expr: stddev_over_time(sa_serverstatistics_timetoobtainprocess_overallavg{env="production"}[5m])
+      > 6
+    for: 5m
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} has had increasing time to obtain process
+        over the last 5 minutes.'
+      summary: Node {{ $labels.instance }} increasing time to obtain process.
+  - alert: CriticalStorageException
+    expr: increase(sa_serverstatistics_storageexceptions_overallcount[1m]) > 1
+    for: 1s
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} detected a critical {{ $value }} storage
+        exception(s).'
+      summary: Node {{ $labels.instance }} detected a critical storage exception.
+  - alert: WorkManagerStartDelay
+    expr: sa_serverstatistics_workmanagerstart_overallavg > 100
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} time to start work in the work manager
+        is {{ $value }}ms on average, about the 50ms threshold.'
+      summary: Node {{ $labels.instance }} work manager is experiencing delays.
+  - alert: WorkManagerQueueExceedsThreads
+    expr: sa_systemmetrics_workmanagermetrics_queuedrequestcount > sa_systemmetrics_workmanagermetrics_activethreadcount
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} work manager queue size is {{ $value }},
+        which is greater than the total number of threads executing.'
+      summary: Node {{ $labels.instance }} work manager queue is greater than the
+        number of threads executing.
+  - alert: JmxExporterDown
+    expr: up == 0
+    for: 2m
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} does not have a jmx_exporter which is responding
+        normally please check jmx_exporter process or verify the ICRT node is available.'
+      summary: Node {{ $labels.instance }} jmx_exporter is not responding.
+  - alert: HighCPUWarning
+    expr: java_operatingsystem_systemcpuload * 100 > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{ $labels.instance }} has CPU usage above 80% for the past 15
+        minutes.'
+      summary: Node {{ $labels.instance }} CPU above 80%
+  - alert: HighCPUError
+    expr: java_operatingsystem_systemcpuload * 100 > 95
+    for: 5m
+    labels:
+      severity: error
+    annotations:
+      description: '{{ $labels.instance }} has CPU usage above 95% for the past 5
+        minutes.'
+      summary: Node {{ $labels.instance }} CPU above 95%
