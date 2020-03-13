@@ -150,5 +150,26 @@ By default this project has configured some rules as examples of the types of al
 
 Any contributions to add alerting will be appreciated.
 
+# Troubleshooting
+
+## Windows Users
+
+* If you encounter the following error, you'll need to convert line endings in the file located at *images/grafana/config-n-run.sh* from CRLF to LF.  
+
+  `standard_init_linux.go:190: exec user process caused "no such file or directory"`
+
+  You can use a tool like *dos2unix* or your favorite editor if it supports it.
+
+* If the prometheus and/or the grafana container crashes shortly after starting you may need to convert the relative paths, located in file *docker-compose.yml*, to absolute paths. For example,
+
+  'build: ./images/grafana'
+
+  would become
+
+  'build: C:\git\secure-agent-monitor\images\grafana'
+
+  There are multiple locations that will need to be converted and the path will vary depending on where you cloned this repo.
+
+
 # Disclaimer
 This project is not affiliated with Informatica, LLC. All Informatica product names are trademarks or registered trademarks of Informatica, LLC. All other company and product names are trademarks or registered trademarks of their respective companies.
